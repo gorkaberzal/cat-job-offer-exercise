@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |c|
+  c.berkshelf.enabled = false if Vagrant.has_plugin?("vagrant-berkshelf")
+  c.vm.box = "bento/ubuntu-18.04"
+  c.vm.hostname = "default-ubuntu-1804.vagrantup.com"
+  c.vm.synced_folder ".", "/vagrant", disabled: true
+  c.vm.synced_folder "/home/gorka/.kitchen/cache", "/tmp/omnibus/cache", create: true
+  c.vm.provider :virtualbox do |p|
+    p.name = "kitchen-cat-job-offer-exercise-default-ubuntu-1804-b8e5bb0b-39d1-4cdb-a4d8-2501aa6d0ed4"
+    p.customize ["modifyvm", :id, "--audio", "none"]
+  end
+end
